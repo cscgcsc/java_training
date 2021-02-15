@@ -9,7 +9,7 @@ public class FirstClass {
 		Point p2 = new Point(15.0, 25.0);
 
 		double scale = Math.pow(10, 2);
-		double distance = Math.round(p1.calculateDistance(p1, p2) * scale) / scale;
+		double distance = Math.round(p1.calculateDistance(p2) * scale) / scale;
 		System.out.println("Distance: " + distance);
 	}		
 }	
