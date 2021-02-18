@@ -2,7 +2,10 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.model.Contact;
+
+import java.util.List;
 
 public class ContactHelper extends HelperBase {
 
@@ -34,5 +37,31 @@ public class ContactHelper extends HelperBase {
 
     public void goToNewContactPage() {
         driver.findElement(By.xpath("//div[@id='nav']//a[contains(@href, 'edit.php')]")).click();
+    }
+
+    public void goToHomePage() {
+        driver.findElement(By.xpath("//div[@id='nav']//a[contains(@href, './')]")).click();
+    }
+
+    public void selectContact(int i) {
+        List<WebElement> elements = driver.findElements(By.xpath("//table[@id='maintable']//input[@name='selected[]']"));
+        if(i >= 0 && i < elements.size())
+            elements.get(i).click();
+    }
+
+    public void submitRemoval() {
+        driver.findElement(By.xpath("//input[@value='Delete']")).click();
+        driver.switchTo().alert().accept();
+    }
+
+    public void initModification(int i) {
+        List<WebElement> elements = driver.findElements(By.xpath("//table[@id='maintable']//a[contains(@href,'edit.php?id=')]"));
+        if(i >= 0 && i < elements.size())
+            elements.get(i).click();
+    }
+
+    public void submitModification() {
+        List<WebElement> elements = driver.findElements(By.xpath("//input[@value='Update']"));
+        elements.get(0).click();
     }
 }
