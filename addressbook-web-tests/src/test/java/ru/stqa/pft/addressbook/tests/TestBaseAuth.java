@@ -1,7 +1,7 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.openqa.selenium.remote.BrowserType;
+import org.testng.annotations.*;
 import ru.stqa.pft.addressbook.appmanager.ApplicationManager;
 import ru.stqa.pft.addressbook.model.Account;
 
@@ -10,13 +10,13 @@ public class TestBaseAuth {
 
     @BeforeMethod
     public void SetUp() {
-        app = new ApplicationManager();
+        app = ApplicationManager.getInstance(BrowserType.IE);
         Account account = new Account("admin", "secret");
         app.auth.login(account);
     }
 
-    @AfterMethod
+    @AfterTest
     public void TearDown() {
-        app.driver.quit();
+        ApplicationManager.Stop();
     }
 }
