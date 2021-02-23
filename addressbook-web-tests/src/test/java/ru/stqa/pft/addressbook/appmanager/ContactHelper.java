@@ -43,10 +43,9 @@ public class ContactHelper extends HelperBase {
         driver.findElement(By.xpath("//div[@id='nav']//a[contains(@href, './')]")).click();
     }
 
-    public void selectContact(int i) {
+    public void selectContact() {
         List<WebElement> elements = driver.findElements(By.xpath("//table[@id='maintable']//input[@name='selected[]']"));
-        if(i >= 0 && i < elements.size())
-            elements.get(i).click();
+        elements.get(0).click();
     }
 
     public void submitRemoval() {
@@ -54,10 +53,9 @@ public class ContactHelper extends HelperBase {
         driver.switchTo().alert().accept();
     }
 
-    public void initModification(int i) {
+    public void initModification() {
         List<WebElement> elements = driver.findElements(By.xpath("//table[@id='maintable']//a[contains(@href,'edit.php?id=')]"));
-        if(i >= 0 && i < elements.size())
-            elements.get(i).click();
+        elements.get(0).click();
     }
 
     public void submitModification() {

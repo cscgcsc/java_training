@@ -35,10 +35,9 @@ public class GroupHelper extends HelperBase{
         driver.findElement(By.xpath("//input[@name='new']")).click();
     }
 
-    public void selectGroup(int i) {
+    public void selectGroup() {
        List<WebElement> elements = driver.findElements(By.xpath("//div[@id='content']//input[@name='selected[]']"));
-       if(i >= 0 && i < elements.size())
-            elements.get(i).click();
+       elements.get(0).click();
     }
 
     public void submitRemoval() {

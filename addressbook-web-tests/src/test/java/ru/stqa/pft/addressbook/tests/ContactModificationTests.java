@@ -10,7 +10,7 @@ public class ContactModificationTests extends TestBaseAuth {
         Contact contact = new Contact("Text 4", "Text 5");
 
         app.contact.goToHomePage();
-        app.contact.initModification(1);
+        app.contact.initModification();
         app.contact.fillContactForm(contact);
         app.contact.submitModification();
         app.contact.returnToHomePage();

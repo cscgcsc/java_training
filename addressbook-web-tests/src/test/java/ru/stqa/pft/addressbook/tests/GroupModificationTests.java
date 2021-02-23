@@ -10,7 +10,7 @@ public class GroupModificationTests extends TestBaseAuth {
         Group group = new Group("Text 4", "Text 5", "Text 6");
 
         app.group.goToGroupPage();
-        app.group.selectGroup(1);
+        app.group.selectGroup();
         app.group.initGroupModification();
         app.group.fillGroupForm(group);
         app.group.submitModification();

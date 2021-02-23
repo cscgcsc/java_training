@@ -7,7 +7,7 @@ public class ContactRemovalTests extends TestBaseAuth {
     @Test
     public void testContactRemoval() {
         app.contact.goToHomePage();
-        app.contact.selectContact(1);
+        app.contact.selectContact();
         app.contact.submitRemoval();
         app.auth.logout();
     }

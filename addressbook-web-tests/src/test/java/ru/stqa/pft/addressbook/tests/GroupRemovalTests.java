@@ -7,7 +7,7 @@ public class GroupRemovalTests extends TestBaseAuth {
     @Test
     public void testGroupRemoval() {
         app.group.goToGroupPage();
-        app.group.selectGroup(1);
+        app.group.selectGroup();
         app.group.submitRemoval();
         app.group.returnToGroupPage();
         app.auth.logout();
