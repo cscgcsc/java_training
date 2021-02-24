@@ -25,7 +25,7 @@ public class ApplicationManager {
         } else {
             driver = new ChromeDriver();
         }
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
         driver.get("http://localhost/addressbook/");
 
         auth = new AuthorizationHelper(driver);

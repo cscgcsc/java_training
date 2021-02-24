@@ -36,8 +36,8 @@ public class GroupHelper extends HelperBase{
     }
 
     public void selectGroup() {
-       List<WebElement> elements = driver.findElements(By.xpath("//div[@id='content']//input[@name='selected[]']"));
-       elements.get(0).click();
+        List<WebElement> elements = getGroupsList();
+        elements.get(0).click();
     }
 
     public void submitRemoval() {
@@ -50,5 +50,17 @@ public class GroupHelper extends HelperBase{
 
     public void submitModification() {
         driver.findElement(By.xpath("//input[@name='update']")).click();
+    }
+
+    public List<WebElement> getGroupsList() {
+         return driver.findElements(By.xpath("//div[@id='content']//input[@name='selected[]']"));
+    }
+
+    public void CreateGroup(Group group) {
+        goToGroupPage();
+        initGroupCreation();
+        fillGroupForm(group);
+        submitCreation();
+        returnToGroupPage();
     }
 }

@@ -10,7 +10,7 @@ public class TestBaseAuth {
 
     @BeforeMethod
     public void SetUp() {
-        app = ApplicationManager.getInstance(BrowserType.IE);
+        app = ApplicationManager.getInstance(BrowserType.CHROME);
         Account account = new Account("admin", "secret");
         app.auth.login(account);
     }

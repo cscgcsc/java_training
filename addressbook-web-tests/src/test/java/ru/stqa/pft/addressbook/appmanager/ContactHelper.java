@@ -44,7 +44,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public void selectContact() {
-        List<WebElement> elements = driver.findElements(By.xpath("//table[@id='maintable']//input[@name='selected[]']"));
+        List<WebElement> elements = getContactsList();
         elements.get(0).click();
     }
 
@@ -61,5 +61,16 @@ public class ContactHelper extends HelperBase {
     public void submitModification() {
         List<WebElement> elements = driver.findElements(By.xpath("//input[@value='Update']"));
         elements.get(0).click();
+    }
+
+    public List<WebElement> getContactsList() {
+        return driver.findElements(By.xpath("//table[@id='maintable']//input[@name='selected[]']"));
+    }
+
+    public void CreateContact(Contact contact) {
+        goToNewContactPage();
+        fillContactForm(contact);
+        submitCreation();
+        returnToHomePage();
     }
 }
