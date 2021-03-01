@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.model.Group;
 
-import java.util.List;
+import java.util.*;
 
 public class GroupHelper extends HelperBase{
 
@@ -35,9 +35,9 @@ public class GroupHelper extends HelperBase{
         driver.findElement(By.xpath("//input[@name='new']")).click();
     }
 
-    public void selectGroup() {
-        List<WebElement> elements = getGroupsList();
-        elements.get(0).click();
+    public void selectGroup(int i) {
+        List<WebElement> elements = getCheckboxList();
+        elements.get(i).click();
     }
 
     public void submitRemoval() {
@@ -52,8 +52,20 @@ public class GroupHelper extends HelperBase{
         driver.findElement(By.xpath("//input[@name='update']")).click();
     }
 
-    public List<WebElement> getGroupsList() {
+    public List<WebElement> getCheckboxList() {
          return driver.findElements(By.xpath("//div[@id='content']//input[@name='selected[]']"));
+    }
+
+    public List<Group> getGroupsList() {
+        List<WebElement> elements = driver.findElements(By.xpath("//div[@id='content']//span[contains(@class, 'group')]"));
+        List<Group> groups = new ArrayList<>();
+        for(WebElement element : elements) {
+            Group newGroup = new Group();
+            newGroup.setId(Integer.parseInt(element.findElement(By.xpath(".//input[@name='selected[]']")).getAttribute("value")));
+            newGroup.setName(element.getText());
+            groups.add(newGroup);
+        }
+        return groups;
     }
 
     public void CreateGroup(Group group) {

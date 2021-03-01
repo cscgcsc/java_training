@@ -1,6 +1,9 @@
 package ru.stqa.pft.addressbook.model;
 
-public class Contact {
+import java.util.Objects;
+
+public class Contact implements Comparable {
+    private int id;
     private String firstname;
     private String lastname;
     private String middlename;
@@ -117,4 +120,42 @@ public class Contact {
     public void setFile(String file) {
         this.file = file;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Contact contact = (Contact) o;
+        return getId() == contact.getId() && Objects.equals(firstname, contact.firstname) && Objects.equals(lastname, contact.lastname);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), firstname, lastname);
+    }
+
+    @Override
+    public String toString() {
+        return "Contact{" +
+                "id=" + id +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                '}';
+    }
+
+    @Override
+    public int compareTo(Object obj) {
+        if (obj == null) return 1;
+        Contact otherContact = (Contact) obj;
+        return Integer.compare(this.getId(), otherContact.getId());
+    }
 }
+

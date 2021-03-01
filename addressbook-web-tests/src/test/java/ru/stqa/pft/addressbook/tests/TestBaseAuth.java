@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.tests;
 
+import org.apache.tools.ant.taskdefs.Sleep;
 import org.openqa.selenium.remote.BrowserType;
 import org.testng.annotations.*;
 import ru.stqa.pft.addressbook.appmanager.ApplicationManager;
@@ -18,5 +19,10 @@ public class TestBaseAuth {
     @AfterTest
     public void TearDown() {
         ApplicationManager.Stop();
+    }
+
+    public void Wait() {
+        Sleep element = new Sleep();
+        element.doSleep(10000);
     }
 }
