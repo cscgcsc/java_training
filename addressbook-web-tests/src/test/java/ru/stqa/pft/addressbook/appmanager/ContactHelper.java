@@ -4,8 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.model.Contact;
-import java.util.ArrayList;
+import ru.stqa.pft.addressbook.model.Contacts;
 import java.util.List;
+
 
 public class ContactHelper extends HelperBase {
 
@@ -13,15 +14,26 @@ public class ContactHelper extends HelperBase {
         super(driver);
     }
 
-    public void returnToHomePage() {
-        driver.findElement(By.xpath("//div[contains(@class, 'msgbox')]//a[contains(@href, 'index.php')]")).click();
+    public void create(Contact contact) {
+        goToNewContactPage();
+        fillForm(contact);
+        submitCreation();
+        returnToHomePage();
     }
 
-    public void submitCreation() {
-        driver.findElement(By.xpath("//input[@name='submit']")).click();
+    public void modify(Contact contact) {
+        initModification(contact);
+        fillForm(contact);
+        submitModification();
+        returnToHomePage();
     }
 
-    public void fillContactForm(Contact contact) {
+    public void remove(Contact contact) {
+        selectContact(contact);
+        submitRemoval();
+    }
+
+    public void fillForm(Contact contact) {
         Type(By.xpath("//input[@name='firstname']"), contact.getFirstname());
         Type(By.xpath("//input[@name='lastname']"), contact.getLastname());
         Type(By.xpath("//input[@name='middlename']"), contact.getMiddlename());
@@ -35,17 +47,8 @@ public class ContactHelper extends HelperBase {
         Type(By.xpath("//input[@name='byear']"), contact.getByear());
     }
 
-    public void goToNewContactPage() {
-        driver.findElement(By.xpath("//div[@id='nav']//a[contains(@href, 'edit.php')]")).click();
-    }
-
-    public void goToHomePage() {
-        driver.findElement(By.xpath("//div[@id='nav']//a[contains(@href, './')]")).click();
-    }
-
-    public void selectContact(int index) {
-        List<WebElement> elements = getCheckboxList();
-        elements.get(index).click();
+    public void selectContact(Contact contact) {
+        driver.findElement(By.xpath("//table[@id='maintable']//input[@name='selected[]' and @value='" + contact.getId() + "']")).click();
     }
 
     public void submitRemoval() {
@@ -53,9 +56,8 @@ public class ContactHelper extends HelperBase {
         driver.switchTo().alert().accept();
     }
 
-    public void initModification(int index) {
-        List<WebElement> elements = driver.findElements(By.xpath("//table[@id='maintable']//a[contains(@href,'edit.php?id=')]"));
-        elements.get(index).click();
+    public void initModification(Contact contact) {
+        driver.findElement(By.xpath("//table[@id='maintable']//a[contains(@href,'edit.php?id=" + contact.getId() + "')]")).click();
     }
 
     public void submitModification() {
@@ -63,13 +65,28 @@ public class ContactHelper extends HelperBase {
         elements.get(0).click();
     }
 
+    public void submitCreation() {
+        driver.findElement(By.xpath("//input[@name='submit']")).click();
+    }
+
+    public void goToNewContactPage() {
+        driver.findElement(By.xpath("//div[@id='nav']//a[contains(@href, 'edit.php')]")).click();
+    }
+
+    public void returnToHomePage() {
+        driver.findElement(By.xpath("//div[contains(@class, 'msgbox')]//a[contains(@href, 'index.php')]")).click();
+    }
+    public void goToHomePage() {
+        driver.findElement(By.xpath("//div[@id='nav']//a[contains(@href, './')]")).click();
+    }
+
     public List<WebElement> getCheckboxList() {
         return driver.findElements(By.xpath("//table[@id='maintable']//input[@name='selected[]']"));
     }
 
-    public List<Contact> getContactsList() {
+    public Contacts getAll() {
         List<WebElement> rows = driver.findElements(By.xpath("//table[@id='maintable']//tr"));
-        List<Contact> contacts = new ArrayList<>();
+        Contacts contacts = new Contacts();
         for(WebElement row : rows) {
             List<WebElement> cells = row.findElements(By.xpath(".//td"));
             if (cells.size() == 0)
@@ -83,26 +100,18 @@ public class ContactHelper extends HelperBase {
         return contacts;
     }
 
-    public void CreateContact(Contact contact) {
-        goToNewContactPage();
-        fillContactForm(contact);
-        submitCreation();
-        returnToHomePage();
-    }
-
     public List<WebElement> getMessage() {
         return driver.findElements(By.xpath("//div[contains(@class, 'msgbox')]"));
     }
 
     public String getMessageText() {
         List<WebElement> elements = getMessage();
-        if(elements.size() > 0)
-            return elements.get(0).getText();
-        else
+        if (elements.size() == 0) {
             return "";
-    }
-
-    public void waitUpdatingPage() {
-        wait.until(d -> !IsElementPresent(By.xpath("//div[contains(@class, 'msgbox')]")));
+        } else {
+            String text = elements.get(0).getText();
+            wait.until(d -> !IsElementPresent(By.xpath("//div[contains(@class, 'msgbox')]")));
+            return text;
+        }
     }
 }

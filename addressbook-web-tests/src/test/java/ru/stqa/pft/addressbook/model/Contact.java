@@ -29,104 +29,117 @@ public class Contact implements Comparable {
         return firstname;
     }
 
-    public void setFirstname(String firstname) {
+    public Contact setFirstname(String firstname) {
         this.firstname = firstname;
+        return this;
     }
 
     public String getLastname() {
         return lastname;
     }
 
-    public void setLastname(String lastname) {
+    public Contact setLastname(String lastname) {
         this.lastname = lastname;
+        return this;
     }
 
     public String getMiddlename() {
         return middlename;
     }
 
-    public void setMiddlename(String middlename) {
+    public Contact setMiddlename(String middlename) {
         this.middlename = middlename;
+        return this;
     }
 
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public Contact setAddress(String address) {
         this.address = address;
+        return this;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public Contact setEmail(String email) {
         this.email = email;
+        return this;
     }
 
     public String getEmail2() {
         return email2;
     }
 
-    public void setEmail2(String email2) {
+    public Contact setEmail2(String email2) {
         this.email2 = email2;
+        return this;
     }
 
     public String getHomePhone() {
         return homePhone;
     }
 
-    public void setHomePhone(String homePhone) {
+    public Contact setHomePhone(String homePhone) {
         this.homePhone = homePhone;
+        return this;
     }
 
     public String getMobilePhone() {
         return mobilePhone;
     }
 
-    public void setMobilePhone(String mobilePhone) {
+    public Contact setMobilePhone(String mobilePhone) {
         this.mobilePhone = mobilePhone;
+        return this;
     }
 
     public String getBday() {
         return bday;
     }
 
-    public void setBday(String bday) {
+    public Contact setBday(String bday) {
         this.bday = bday;
+        return this;
     }
 
     public String getBmonth() {
         return bmonth;
     }
 
-    public void setBmonth(String bmonth) {
+    public Contact setBmonth(String bmonth) {
         this.bmonth = bmonth;
+        return this;
     }
 
     public String getByear() {
         return byear;
     }
 
-    public void setByear(String byear) {
+    public Contact setByear(String byear) {
         this.byear = byear;
+        return this;
     }
 
     public String getFile() {
         return file;
     }
 
-    public void setFile(String file) {
+    public Contact setFile(String file) {
         this.file = file;
+        return this;
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public Contact setId(int id) {
         this.id = id;
+        return this;
     }
 
     @Override

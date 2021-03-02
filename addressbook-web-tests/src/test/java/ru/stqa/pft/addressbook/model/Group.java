@@ -21,32 +21,36 @@ public class Group {
         return name;
     }
 
-    public void setName(String name) {
+    public Group setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getHeader() {
         return header;
     }
 
-    public void setHeader(String header) {
+    public Group setHeader(String header) {
         this.header = header;
+        return this;
     }
 
     public String getFooter() {
         return footer;
     }
 
-    public void setFooter(String footer) {
+    public Group setFooter(String footer) {
         this.footer = footer;
+        return this;
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public Group setId(int id) {
         this.id = id;
+        return this;
     }
 
     @Override

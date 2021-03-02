@@ -9,13 +9,12 @@ import org.openqa.selenium.remote.BrowserType;
 import java.time.Duration;
 
 public class ApplicationManager {
-    public static WebDriver driver;
+    public WebDriver driver;
     public AuthorizationHelper auth;
     public GroupHelper group;
     public ContactHelper contact;
-    private static ApplicationManager applicationManager;
 
-    private ApplicationManager(String browser) {
+    public ApplicationManager(String browser) {
         if(browser.equals(BrowserType.CHROME)) {
             driver = new ChromeDriver();
         } else if(browser.equals(BrowserType.FIREFOX)) {
@@ -33,16 +32,7 @@ public class ApplicationManager {
         contact = new ContactHelper(driver);
     }
 
-    public static ApplicationManager getInstance(String browser) {
-        if(applicationManager != null) {
-            return applicationManager;
-        } else {
-            applicationManager = new ApplicationManager(browser);
-            return applicationManager;
-        }
-    }
-
-    public static void Stop() {
+    public void stop() {
         driver.quit();
     }
 }

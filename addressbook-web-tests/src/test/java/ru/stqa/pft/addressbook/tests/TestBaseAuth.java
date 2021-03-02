@@ -7,21 +7,21 @@ import ru.stqa.pft.addressbook.appmanager.ApplicationManager;
 import ru.stqa.pft.addressbook.model.Account;
 
 public class TestBaseAuth {
-    protected ApplicationManager app;
+    protected static ApplicationManager app;
 
-    @BeforeMethod
+    @BeforeSuite
     public void SetUp() {
-        app = ApplicationManager.getInstance(BrowserType.CHROME);
-        Account account = new Account("admin", "secret");
-        app.auth.login(account);
+        app = new ApplicationManager(BrowserType.CHROME);
+        app.auth.login(new Account("admin", "secret"));
     }
 
-    @AfterTest
+    @AfterSuite
     public void TearDown() {
-        ApplicationManager.Stop();
+        app.auth.logout();
+        app.stop();
     }
 
-    public void Wait() {
+    protected void TestWait() {
         Sleep element = new Sleep();
         element.doSleep(10000);
     }

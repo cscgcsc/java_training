@@ -16,7 +16,7 @@ public class HelperBase {
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
-    public void Type(By by, String value) {
+    protected void Type(By by, String value) {
         if(value != null) {
             WebElement element = driver.findElement(by);
             element.clear();
@@ -24,7 +24,7 @@ public class HelperBase {
         }
     }
 
-    public void SelectByValue(By by, String value) {
+    protected void SelectByValue(By by, String value) {
         if(value != null) {
             WebElement element = driver.findElement(by);
             Select select = new Select(element);
