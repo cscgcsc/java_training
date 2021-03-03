@@ -10,8 +10,12 @@ public class Contact implements Comparable {
     private String address;
     private String email;
     private String email2;
+    private String email3;
+    private String allEmails;
     private String homePhone;
     private String mobilePhone;
+    private String workPhone;
+    private String allPhones;
     private String bday;
     private String bmonth;
     private String byear;
@@ -130,6 +134,42 @@ public class Contact implements Comparable {
 
     public Contact setFile(String file) {
         this.file = file;
+        return this;
+    }
+
+    public String getEmail3() {
+        return email3;
+    }
+
+    public Contact setEmail3(String email3) {
+        this.email3 = email3;
+        return this;
+    }
+
+    public String getWorkPhone() {
+        return workPhone;
+    }
+
+    public Contact setWorkPhone(String workPhone) {
+        this.workPhone = workPhone;
+        return this;
+    }
+
+    public String getAllPhones() {
+        return allPhones;
+    }
+
+    public Contact setAllPhones(String allPhones) {
+        this.allPhones = allPhones;
+        return this;
+    }
+
+    public String getAllEmails() {
+        return allEmails;
+    }
+
+    public Contact setAllEmails(String allEmails) {
+        this.allEmails = allEmails;
         return this;
     }
 

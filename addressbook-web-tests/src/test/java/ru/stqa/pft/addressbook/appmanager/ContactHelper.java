@@ -47,6 +47,24 @@ public class ContactHelper extends HelperBase {
         Type(By.xpath("//input[@name='byear']"), contact.getByear());
     }
 
+    public Contact getInformationFromForm() {
+        Contact contact = new Contact();
+        contact.setFirstname(driver.findElement(By.xpath("//input[@name='firstname']")).getAttribute("value"));
+        contact.setLastname(driver.findElement(By.xpath("//input[@name='lastname']")).getAttribute("value"));
+        contact.setMiddlename(driver.findElement(By.xpath("//input[@name='middlename']")).getAttribute("value"));
+        contact.setEmail(driver.findElement(By.xpath("//input[@name='email']")).getAttribute("value"));
+        contact.setEmail2(driver.findElement(By.xpath("//input[@name='email2']")).getAttribute("value"));
+        contact.setEmail3(driver.findElement(By.xpath("//input[@name='email3']")).getAttribute("value"));
+        contact.setHomePhone(driver.findElement(By.xpath("//input[@name='home']")).getAttribute("value"));
+        contact.setMobilePhone(driver.findElement(By.xpath("//input[@name='mobile']")).getAttribute("value"));
+        contact.setWorkPhone(driver.findElement(By.xpath("//input[@name='work']")).getAttribute("value"));
+        contact.setAddress(driver.findElement(By.xpath("//textarea[@name='address']")).getAttribute("value"));
+        contact.setBday(driver.findElement(By.xpath("//select[@name='bday']")).getAttribute("value"));
+        contact.setBmonth(driver.findElement(By.xpath("//select[@name='bmonth']")).getAttribute("value"));
+        contact.setByear(driver.findElement(By.xpath("//input[@name='byear']")).getAttribute("value"));
+        return contact;
+    }
+
     public void selectContact(Contact contact) {
         driver.findElement(By.xpath("//table[@id='maintable']//input[@name='selected[]' and @value='" + contact.getId() + "']")).click();
     }
@@ -95,6 +113,9 @@ public class ContactHelper extends HelperBase {
             newContact.setId(Integer.parseInt(cells.get(0).findElement(By.xpath(".//input[@name='selected[]']")).getAttribute("value")));
             newContact.setFirstname(cells.get(2).getText());
             newContact.setLastname(cells.get(1).getText());
+            newContact.setAddress(cells.get(3).getText());
+            newContact.setAllEmails(cells.get(4).getText());
+            newContact.setAllPhones(cells.get(5).getText());
             contacts.add(newContact);
         }
         return contacts;
