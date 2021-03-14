@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.appmanager;
 
+import org.apache.tools.ant.taskdefs.Sleep;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -35,5 +36,16 @@ public class HelperBase {
     protected boolean IsElementPresent(By by)
     {
         return driver.findElements(by).size() > 0;
+    }
+
+    protected void WaitForElementPresent(By by)  {
+        Sleep element = new Sleep();
+        for (int second = 0;; second++) {
+            if (second >= 10)
+                break;
+            if (IsElementPresent(by))
+                break;
+            element.doSleep(1000);
+        }
     }
 }

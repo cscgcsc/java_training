@@ -10,9 +10,9 @@ public class TestBaseAuth {
     protected static ApplicationManager app;
 
     @BeforeSuite
-    public void SetUp() {
-        app = new ApplicationManager(BrowserType.CHROME);
-        app.auth.login(new Account("admin", "secret"));
+    public void SetUp() throws Exception {
+        app = new ApplicationManager(System.getProperty("browser", BrowserType.CHROME));
+        app.auth.login(new Account(app.properties.getProperty("login"), app.properties.getProperty("password")));
     }
 
     @AfterSuite

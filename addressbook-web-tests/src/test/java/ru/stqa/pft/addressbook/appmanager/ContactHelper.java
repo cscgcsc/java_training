@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.appmanager;
 
+import org.apache.tools.ant.taskdefs.Sleep;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -122,13 +123,14 @@ public class ContactHelper extends HelperBase {
     }
 
     public List<WebElement> getMessage() {
+        WaitForElementPresent(By.xpath("//div[contains(@class, 'msgbox')]"));
         return driver.findElements(By.xpath("//div[contains(@class, 'msgbox')]"));
     }
 
     public String getMessageText() {
         List<WebElement> elements = getMessage();
         if (elements.size() == 0) {
-            return "";
+            return "Message box doesn't exist";
         } else {
             String text = elements.get(0).getText();
             wait.until(d -> !IsElementPresent(By.xpath("//div[contains(@class, 'msgbox')]")));
