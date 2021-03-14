@@ -1,11 +1,20 @@
 package ru.stqa.pft.addressbook.model;
 
+import com.google.gson.annotations.Expose;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import java.util.Objects;
 
+@XStreamAlias("contact")
 public class Contact implements Comparable {
+    @XStreamOmitField
     private int id;
+    @Expose
     private String firstname;
+    @Expose
     private String lastname;
+    @Expose
     private String middlename;
     private String address;
     private String email;
