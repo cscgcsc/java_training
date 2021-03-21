@@ -36,9 +36,9 @@ public class GroupHelper extends HelperBase{
     }
 
     public void fillForm(Group group) {
-        Type(By.xpath("//input[@name='group_name']"), group.getName());
-        Type(By.xpath("//textarea[@name='group_header']"), group.getHeader());
-        Type(By.xpath("//textarea[@name='group_footer']"), group.getFooter());
+        type(By.xpath("//input[@name='group_name']"), group.getName());
+        type(By.xpath("//textarea[@name='group_header']"), group.getHeader());
+        type(By.xpath("//textarea[@name='group_footer']"), group.getFooter());
     }
 
     public void submitCreation() {

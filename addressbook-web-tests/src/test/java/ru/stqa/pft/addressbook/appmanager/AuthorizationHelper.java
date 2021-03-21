@@ -11,8 +11,8 @@ public class AuthorizationHelper extends HelperBase {
     }
 
     public void login(Account user) {
-        Type(By.xpath("//input[@name='user']"), user.getName());
-        Type(By.xpath("//input[@name='pass']"), user.getPassword());
+        type(By.xpath("//input[@name='user']"), user.getName());
+        type(By.xpath("//input[@name='pass']"), user.getPassword());
         driver.findElement(By.xpath("//input[@value='Login']")).click();
     }
 

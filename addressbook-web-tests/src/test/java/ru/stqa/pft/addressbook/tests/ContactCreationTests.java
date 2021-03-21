@@ -49,7 +49,7 @@ public class ContactCreationTests extends TestBaseAuth {
         return contacts.stream().map((contact) -> new Object[] {contact}).collect(Collectors.toList()).iterator();
     }
 
-    @Test(dataProvider = "validContactsFromXml")
+    @Test(enabled = false, dataProvider = "validContactsFromXml")
     public void testContactCreation(Contact newContact) {
         app.contact.goToHomePage();
         Contacts before = app.contact.getAll();
@@ -67,6 +67,7 @@ public class ContactCreationTests extends TestBaseAuth {
         app.contact.goToHomePage();
         Contacts before = app.db.getContacts();
         Integer beforeCount = app.db.getContactsCount();
+        newContact.setFilePath("src/test/resources/qwerty.jpg");
         app.contact.create(newContact);
         //verification
         Contacts after = app.db.getContacts();

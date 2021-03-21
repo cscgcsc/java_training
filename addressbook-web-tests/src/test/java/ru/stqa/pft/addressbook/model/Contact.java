@@ -28,7 +28,7 @@ public class Contact implements Comparable {
     private String bday;
     private String bmonth;
     private String byear;
-    private String file;
+    private String filePath;
     private String notes;
 
     public Contact() {
@@ -138,12 +138,12 @@ public class Contact implements Comparable {
         return this;
     }
 
-    public String getFile() {
-        return file;
+    public String getFilePath() {
+        return filePath;
     }
 
-    public Contact setFile(String file) {
-        this.file = file;
+    public Contact setFilePath(String filePath) {
+        this.filePath = filePath;
         return this;
     }
 

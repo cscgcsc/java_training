@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.model.Contact;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.Group;
+
 import java.util.List;
 
 
@@ -33,18 +35,33 @@ public class ContactHelper extends HelperBase {
         submitRemoval();
     }
 
+    public void addToGroup(Contact contact, Group group) {
+        selectContact(contact);
+        selectGroup(group);
+        submitAddingToGroup();
+    }
+
+    private void submitAddingToGroup() {
+        driver.findElement(By.xpath("//input[@name='add']")).click();
+    }
+
+    private void selectGroup(Group group) {
+        selectByValue(By.xpath("//select[@name='to_group']"), Integer.toString(group.getId()));
+    }
+
     public void fillForm(Contact contact) {
-        Type(By.xpath("//input[@name='firstname']"), contact.getFirstname());
-        Type(By.xpath("//input[@name='lastname']"), contact.getLastname());
-        Type(By.xpath("//input[@name='middlename']"), contact.getMiddlename());
-        Type(By.xpath("//input[@name='email']"), contact.getEmail());
-        Type(By.xpath("//input[@name='email2']"), contact.getEmail2());
-        Type(By.xpath("//input[@name='home']"), contact.getHomePhone());
-        Type(By.xpath("//input[@name='mobile']"), contact.getMobilePhone());
-        Type(By.xpath("//textarea[@name='address']"), contact.getAddress());
-        SelectByValue(By.xpath("//select[@name='bday']"), contact.getBday());
-        SelectByValue(By.xpath("//select[@name='bmonth']"), contact.getBmonth());
-        Type(By.xpath("//input[@name='byear']"), contact.getByear());
+        type(By.xpath("//input[@name='firstname']"), contact.getFirstname());
+        type(By.xpath("//input[@name='lastname']"), contact.getLastname());
+        type(By.xpath("//input[@name='middlename']"), contact.getMiddlename());
+        type(By.xpath("//input[@name='email']"), contact.getEmail());
+        type(By.xpath("//input[@name='email2']"), contact.getEmail2());
+        type(By.xpath("//input[@name='home']"), contact.getHomePhone());
+        type(By.xpath("//input[@name='mobile']"), contact.getMobilePhone());
+        type(By.xpath("//textarea[@name='address']"), contact.getAddress());
+        selectByValue(By.xpath("//select[@name='bday']"), contact.getBday());
+        selectByValue(By.xpath("//select[@name='bmonth']"), contact.getBmonth());
+        type(By.xpath("//input[@name='byear']"), contact.getByear());
+        attach(By.xpath("//input[@name='photo']"), contact.getFilePath());
     }
 
     public Contact getInformationFromForm() {
@@ -122,7 +139,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public List<WebElement> getMessage() {
-        WaitForElementPresent(By.xpath("//div[contains(@class, 'msgbox')]"));
+        waitForElementPresent(By.xpath("//div[contains(@class, 'msgbox')]"));
         return driver.findElements(By.xpath("//div[contains(@class, 'msgbox')]"));
     }
 
@@ -132,7 +149,7 @@ public class ContactHelper extends HelperBase {
             return "Message box doesn't exist";
         } else {
             String text = elements.get(0).getText();
-            wait.until(d -> !IsElementPresent(By.xpath("//div[contains(@class, 'msgbox')]")));
+            wait.until(d -> !isElementPresent(By.xpath("//div[contains(@class, 'msgbox')]")));
             return text;
         }
     }
