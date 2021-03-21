@@ -16,7 +16,7 @@ public class ContactInformationTests extends TestBaseAuth {
     @BeforeMethod
     public void ensurePreconditions() {
         app.contact.goToHomePage();
-        if (app.contact.getCheckboxList().size() == 0) {
+        if (app.db.getContactsCount() == 0) {
             Contact contactNew = new Contact("Text 1", "Text 2");
             app.contact.create(contactNew);
         }

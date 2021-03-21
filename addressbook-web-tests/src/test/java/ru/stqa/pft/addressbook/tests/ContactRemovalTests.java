@@ -12,7 +12,7 @@ public class ContactRemovalTests extends TestBaseAuth {
     @BeforeMethod
     public void ensurePreconditions() {
         app.contact.goToHomePage();
-        if (app.contact.getCheckboxList().size() == 0) {
+        if (app.db.getContactsCount() == 0) {
             Contact contactNew = new Contact("Text 1", "Text 2");
             app.contact.create(contactNew);
         }
@@ -30,5 +30,19 @@ public class ContactRemovalTests extends TestBaseAuth {
         assertThat("Number of contacts after removal differs,", after.size(), equalTo(before.size() - 1));
         assertThat("Contact after removal differs from expected", after, equalTo(before.withoutElement(removalContact)));
         //app.auth.logout();
+    }
+
+    @Test
+    public void testContactRemovalDB() {
+        Contacts before = app.db.getContacts();
+        Integer beforeCount = app.db.getContactsCount();
+        Contact removalContact = before.iterator().next();
+        app.contact.remove(removalContact);
+        //verification message text
+        assertThat("Message text doesn't match", app.contact.getMessageText(), equalTo("Record successful deleted"));
+        //verification contacts
+        Contacts after = app.db.getContacts();
+        assertThat("Number of contacts after removal differs,", app.db.getContactsCount(), equalTo(beforeCount - 1));
+        assertThat("Contact after removal differs from expected", after, equalTo(before.withoutElement(removalContact)));
     }
 }

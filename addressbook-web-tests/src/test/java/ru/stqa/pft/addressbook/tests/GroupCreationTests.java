@@ -61,4 +61,17 @@ public class GroupCreationTests extends TestBaseAuth {
         assertThat("Group after creation differs from expected", after, equalTo(before.withElement(newGroup)));
         //app.auth.logout();
     }
+
+    @Test(dataProvider = "validGroupsFromXml")
+    public void testGroupCreationDB(Group newGroup) {
+        app.group.goToGroupPage();
+        Groups before = app.db.getGroups();
+        Integer beforeCount = app.db.getGroupsCount();
+        app.group.create(newGroup);
+        //verification
+        Groups after = app.db.getGroups();
+        newGroup.setId(after.stream().mapToInt((obj) -> obj.getId()).max().getAsInt());
+        assertThat("Number of groups after creation differs", app.db.getGroupsCount(), equalTo(beforeCount + 1));
+        assertThat("Group after creation differs from expected", after, equalTo(before.withElement(newGroup)));
+    }
 }

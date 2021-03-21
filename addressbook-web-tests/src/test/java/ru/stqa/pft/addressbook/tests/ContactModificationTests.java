@@ -12,7 +12,7 @@ public class ContactModificationTests extends TestBaseAuth {
     @BeforeMethod
     public void ensurePreconditions() {
         app.contact.goToHomePage();
-        if (app.contact.getCheckboxList().size() == 0) {
+        if (app.db.getContactsCount() == 0) {
             Contact contactNew = new Contact("Text 1", "Text 2");
             app.contact.create(contactNew);
         }
@@ -31,5 +31,17 @@ public class ContactModificationTests extends TestBaseAuth {
         //app.auth.logout();
     }
 
-
+    @Test
+    public void testContactModificationDB() {
+        Contacts before = app.db.getContacts();
+        Integer beforeCount = app.db.getContactsCount();
+        Contact modifiedContact = before.iterator().next();
+        Contact newContact = new Contact("Text 4", "Text 5").setId(modifiedContact.getId()).setNotes("Text text text 123");
+        app.contact.modify(newContact);
+        //verification
+        Contacts after = app.db.getContacts();
+        assertThat("Number of contacts after modifying differs", app.db.getContactsCount(), equalTo(beforeCount));
+        assertThat("Contact after modifying differs from expected", after, equalTo(before.withoutElement(modifiedContact).withElement(newContact)));
+        //app.auth.logout();
+    }
 }

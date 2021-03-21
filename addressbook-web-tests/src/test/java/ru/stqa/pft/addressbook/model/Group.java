@@ -17,6 +17,8 @@ public class Group {
     @Expose
     private String footer;
 
+    private String created;
+
     public Group() {
     }
 
@@ -59,6 +61,15 @@ public class Group {
 
     public Group setId(int id) {
         this.id = id;
+        return this;
+    }
+
+    public String getCreated() {
+        return created;
+    }
+
+    public Group setCreated(String created) {
+        this.created = created;
         return this;
     }
 

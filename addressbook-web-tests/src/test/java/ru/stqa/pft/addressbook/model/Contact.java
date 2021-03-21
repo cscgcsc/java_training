@@ -29,6 +29,7 @@ public class Contact implements Comparable {
     private String bmonth;
     private String byear;
     private String file;
+    private String notes;
 
     public Contact() {
     }
@@ -188,6 +189,15 @@ public class Contact implements Comparable {
 
     public Contact setId(int id) {
         this.id = id;
+        return this;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public Contact setNotes(String notes) {
+        this.notes = notes;
         return this;
     }
 

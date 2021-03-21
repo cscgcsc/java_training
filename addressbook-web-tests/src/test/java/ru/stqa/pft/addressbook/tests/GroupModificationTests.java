@@ -1,6 +1,5 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.Group;
@@ -13,7 +12,7 @@ public class GroupModificationTests extends TestBaseAuth {
     @BeforeMethod
     public void ensurePreconditions() {
         app.group.goToGroupPage();
-        if (app.group.getCheckboxList().size() == 0) {
+        if (app.db.getGroupsCount() == 0) {
             app.group.create(new Group());
         }
     }
@@ -28,6 +27,18 @@ public class GroupModificationTests extends TestBaseAuth {
         Groups after = app.group.getAll();
         assertThat("Number of groups after modifying differs", after.size(), equalTo(before.size()));
         assertThat("Group after modifying differs from expected", after, equalTo(before.withoutElement(modifiedGroup).withElement(newGroup)));
-        //app.auth.logout();
+    }
+
+    @Test
+    public void testGroupModificationDB() {
+        Groups before = app.db.getGroups();
+        Integer beforeCount = app.db.getGroupsCount();
+        Group modifiedGroup = before.iterator().next();
+        Group newGroup = new Group().setName("Text 4").setHeader("Text 5").setFooter("Text 6").setId(modifiedGroup.getId());
+        app.group.modify(newGroup);
+        //verification
+        Groups after = app.db.getGroups();
+        assertThat("Number of groups after modifying differs", app.db.getGroupsCount(), equalTo(beforeCount));
+        assertThat("Group after modifying differs from expected", after, equalTo(before.withoutElement(modifiedGroup).withElement(newGroup)));
     }
 }

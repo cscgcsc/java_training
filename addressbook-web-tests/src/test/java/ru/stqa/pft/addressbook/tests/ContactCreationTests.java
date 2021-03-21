@@ -60,6 +60,18 @@ public class ContactCreationTests extends TestBaseAuth {
         newContact.setId(after.stream().mapToInt((obj) -> obj.getId()).max().getAsInt());
         assertThat("Number of contacts after creation differs", after.size(), equalTo(before.size() + 1));
         assertThat("Contact after creation differs from expected", after, equalTo(before.withElement(newContact)));
-        //app.auth.logout();
+    }
+
+    @Test(dataProvider = "validContactsFromJson")
+    public void testContactCreationDB(Contact newContact) {
+        app.contact.goToHomePage();
+        Contacts before = app.db.getContacts();
+        Integer beforeCount = app.db.getContactsCount();
+        app.contact.create(newContact);
+        //verification
+        Contacts after = app.db.getContacts();
+        newContact.setId(after.stream().mapToInt((obj) -> obj.getId()).max().getAsInt());
+        assertThat("Number of contacts after creation differs", app.db.getContactsCount(), equalTo(beforeCount + 1));
+        assertThat("Contact after creation differs from expected", after, equalTo(before.withElement(newContact)));
     }
 }

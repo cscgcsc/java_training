@@ -16,9 +16,12 @@ public class ApplicationManager {
     public AuthorizationHelper auth;
     public GroupHelper group;
     public ContactHelper contact;
+    public DBHelper db;
     public Properties properties;
 
     public ApplicationManager(String browser) throws IOException {
+
+        db = new DBHelper();
         if(browser.equals(BrowserType.CHROME)) {
             driver = new ChromeDriver();
         } else if(browser.equals(BrowserType.FIREFOX)) {
@@ -42,5 +45,6 @@ public class ApplicationManager {
 
     public void stop() {
         driver.quit();
+        db.closeConnection();
     }
 }

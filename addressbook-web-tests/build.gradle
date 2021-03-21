@@ -12,6 +12,7 @@ dependencies {
     implementation 'com.thoughtworks.xstream:xstream:1.4.16'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.beust:jcommander:1.81'
+    implementation 'mysql:mysql-connector-java:8.0.23'
 }
 
 test {
