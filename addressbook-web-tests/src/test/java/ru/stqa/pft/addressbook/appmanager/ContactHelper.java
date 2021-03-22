@@ -37,16 +37,14 @@ public class ContactHelper extends HelperBase {
 
     public void addToGroup(Contact contact, Group group) {
         selectContact(contact);
-        selectGroup(group);
+        selectGroupForAdding(group);
         submitAddingToGroup();
     }
 
-    private void submitAddingToGroup() {
-        driver.findElement(By.xpath("//input[@name='add']")).click();
-    }
-
-    private void selectGroup(Group group) {
-        selectByValue(By.xpath("//select[@name='to_group']"), Integer.toString(group.getId()));
+    public void removeFromGroup(Contact contact, Group group) {
+        selectGroup(group);
+        selectContact(contact);
+        submitRemoveFromGroup();
     }
 
     public void fillForm(Contact contact) {
@@ -86,6 +84,14 @@ public class ContactHelper extends HelperBase {
         driver.findElement(By.xpath("//table[@id='maintable']//input[@name='selected[]' and @value='" + contact.getId() + "']")).click();
     }
 
+    private void selectGroup(Group group) {
+        selectByValue(By.xpath("//select[@name='group']"), Integer.toString(group.getId()));
+    }
+
+    private void selectGroupForAdding(Group group) {
+        selectByValue(By.xpath("//select[@name='to_group']"), Integer.toString(group.getId()));
+    }
+
     public void submitRemoval() {
         driver.findElement(By.xpath("//input[@value='Delete']")).click();
         driver.switchTo().alert().accept();
@@ -104,6 +110,14 @@ public class ContactHelper extends HelperBase {
         driver.findElement(By.xpath("//input[@name='submit']")).click();
     }
 
+    private void submitAddingToGroup() {
+        driver.findElement(By.xpath("//input[@name='add']")).click();
+    }
+
+    private void submitRemoveFromGroup() {
+        driver.findElement(By.xpath("//input[@name='remove']")).click();
+    }
+
     public void goToNewContactPage() {
         driver.findElement(By.xpath("//div[@id='nav']//a[contains(@href, 'edit.php')]")).click();
     }
@@ -111,8 +125,13 @@ public class ContactHelper extends HelperBase {
     public void returnToHomePage() {
         driver.findElement(By.xpath("//div[contains(@class, 'msgbox')]//a[contains(@href, 'index.php')]")).click();
     }
+
     public void goToHomePage() {
         driver.findElement(By.xpath("//div[@id='nav']//a[contains(@href, './')]")).click();
+    }
+
+    public void returnToHomePageFromMsgbox() {
+        driver.findElement(By.xpath("//div[contains(@class, 'msgbox')]//a[contains(@href, './')]")).click();
     }
 
     public List<WebElement> getCheckboxList() {
@@ -150,6 +169,17 @@ public class ContactHelper extends HelperBase {
         } else {
             String text = elements.get(0).getText();
             wait.until(d -> !isElementPresent(By.xpath("//div[contains(@class, 'msgbox')]")));
+            return text;
+        }
+    }
+
+    public String getMessageTextAndReturn() {
+        List<WebElement> elements = getMessage();
+        if (elements.size() == 0) {
+            return "Message box doesn't exist";
+        } else {
+            String text = elements.get(0).getText();
+            returnToHomePageFromMsgbox();
             return text;
         }
     }

@@ -48,7 +48,7 @@ public class GroupCreationTests extends TestBaseAuth {
         return groups.stream().map((group) -> new Object[] {group}).collect(Collectors.toList()).iterator();
     }
 
-    @Test(dataProvider = "validGroupsFromJson")
+    @Test(enabled = false, dataProvider = "validGroupsFromJson")
     public void testGroupCreation(Group newGroup) {
         app.group.goToGroupPage();
         Groups before = app.group.getAll();

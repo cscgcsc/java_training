@@ -213,6 +213,30 @@ public class DBHelper {
         return groups;
     }
 
+    public Contacts getContactsInGroups() {
+        Contacts contacts = new Contacts();
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT addressbook.id, addressbook.firstname, addressbook.lastname" +
+                    " FROM address_in_groups" +
+                    " INNER JOIN addressbook" +
+                    " ON address_in_groups.id = addressbook.id");
+            while(rs.next()) {
+                contacts.add(new Contact()
+                        .setId(rs.getInt("id"))
+                        .setFirstname(rs.getString("firstname"))
+                        .setLastname(rs.getString("lastname")));
+            }
+            rs.close();
+            stmt.close();
+        }
+        catch (SQLException ex) {
+            printException(ex);
+        }
+
+        return contacts;
+    }
+
     private void printException(SQLException ex) {
         System.out.println("SQLException: " + ex.getMessage());
         System.out.println("SQLState: " + ex.getSQLState());
