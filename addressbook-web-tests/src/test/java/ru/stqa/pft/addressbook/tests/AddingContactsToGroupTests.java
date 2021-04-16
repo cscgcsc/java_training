@@ -12,7 +12,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class AddingContactsToGroupTests extends TestBaseAuth {
 
-    @BeforeMethod
+    @BeforeMethod(enabled = false)
     public void ensurePreconditions() {
         app.contact.goToHomePage();
         if (app.db.getContactsCount() == 0 || app.db.getContactsForAddingToGroup().size() == 0) {
@@ -25,7 +25,7 @@ public class AddingContactsToGroupTests extends TestBaseAuth {
         }
     }
 
-    @Test
+    @Test(enabled = false)
     public void testAddingContactToGroup() {
         app.contact.goToHomePage();
         Contacts availableContacts = app.db.getContactsForAddingToGroup();

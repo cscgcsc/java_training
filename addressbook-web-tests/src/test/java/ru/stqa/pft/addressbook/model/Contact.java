@@ -3,33 +3,91 @@ package ru.stqa.pft.addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @XStreamAlias("contact")
+@Entity
+@Table(name = "addressbook")
 public class Contact implements Comparable {
+
     @XStreamOmitField
+    @Id
+    @Column(name = "id")
     private int id;
+
     @Expose
+    @Column(name = "firstname")
     private String firstname;
+
     @Expose
+    @Column(name = "lastname")
     private String lastname;
+
     @Expose
+    @Column(name = "middlename")
     private String middlename;
+
+    @Column(name = "address")
+    @Type(type = "text")
     private String address;
+
+    @Column(name = "email")
+    @Type(type = "text")
     private String email;
+
+    @Column(name = "email2")
+    @Type(type = "text")
     private String email2;
+
+    @Column(name = "email3")
+    @Type(type = "text")
     private String email3;
+
+    @Transient
     private String allEmails;
+
+    @Column(name = "home")
+    @Type(type = "text")
     private String homePhone;
+
+    @Column(name = "mobile")
+    @Type(type = "text")
     private String mobilePhone;
+
+    @Column(name = "work")
+    @Type(type = "text")
     private String workPhone;
+
+    @Transient
     private String allPhones;
-    private String bday;
+
+    @Column(name = "bday")
+    @Type(type = "byte")
+    private Byte bday;
+
+    @Column(name = "bmonth")
+    @Type(type = "text")
     private String bmonth;
+
+    @Column(name = "byear")
+    @Type(type = "text")
     private String byear;
+
+    @Transient
     private String filePath;
+
+    @Column(name = "notes")
+    @Type(type = "text")
     private String notes;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "address_in_groups", joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+    private Set<Group> groups = new HashSet<>();
 
     public Contact() {
     }
@@ -112,11 +170,12 @@ public class Contact implements Comparable {
     }
 
     public String getBday() {
-        return bday;
+        if(bday != null) return Byte.toString(bday);
+        return "0";
     }
 
     public Contact setBday(String bday) {
-        this.bday = bday;
+        this.bday = Byte.parseByte(bday);
         return this;
     }
 
@@ -201,6 +260,14 @@ public class Contact implements Comparable {
         return this;
     }
 
+    public Set<Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(Set<Group> groups) {
+        this.groups = groups;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -231,3 +298,4 @@ public class Contact implements Comparable {
     }
 }
 
+//https://docs.jboss.org/hibernate/orm/3.5/api/org/hibernate/type/package-summary.html

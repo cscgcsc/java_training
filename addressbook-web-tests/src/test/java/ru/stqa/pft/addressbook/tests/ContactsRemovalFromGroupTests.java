@@ -13,7 +13,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class ContactsRemovalFromGroupTests extends TestBaseAuth {
 
-    @BeforeMethod
+    @BeforeMethod(enabled = false)
     public void ensurePreconditions() {
         app.contact.goToHomePage();
         if(app.db.getContactsInGroups().size() == 0) {
@@ -33,7 +33,7 @@ public class ContactsRemovalFromGroupTests extends TestBaseAuth {
         }
     }
 
-    @Test
+    @Test(enabled = false)
     public void testRemovalContactFromGroup() {
         app.contact.goToHomePage();
         Contacts availableContacts = app.db.getContactsInGroups();

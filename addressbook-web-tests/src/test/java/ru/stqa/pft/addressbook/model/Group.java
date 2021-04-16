@@ -3,21 +3,44 @@ package ru.stqa.pft.addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @XStreamAlias("group")
+@Entity
+@Table(name = "group_list")
 public class Group {
+
     @XStreamOmitField
+    @Id
+    @Column(name = "group_id")
     private int id;
+
     @Expose
+    @Column(name = "group_name")
     private String name;
+
     @Expose
+    @Column(name = "group_header")
+    @Type(type = "text")
     private String header;
+
     @Expose
+    @Column(name = "group_footer")
+    @Type(type = "text")
     private String footer;
 
-    private String created;
+    @Column(name = "created")
+    @Type(type = "timestamp")
+    private Date created;
+
+    @ManyToMany(mappedBy = "groups")
+    private Set<Contact> contacts = new HashSet<>();
 
     public Group() {
     }
@@ -64,13 +87,21 @@ public class Group {
         return this;
     }
 
-    public String getCreated() {
+    public Date getCreated() {
         return created;
     }
 
-    public Group setCreated(String created) {
+    public Group setCreated(Date created) {
         this.created = created;
         return this;
+    }
+
+    public Set<Contact> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(Set<Contact> contacts) {
+        this.contacts = contacts;
     }
 
     @Override

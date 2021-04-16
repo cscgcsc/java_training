@@ -17,11 +17,13 @@ public class ApplicationManager {
     public GroupHelper group;
     public ContactHelper contact;
     public DBHelper db;
+    public ORMHelper orm;
     public Properties properties;
 
     public ApplicationManager(String browser) throws IOException {
 
         db = new DBHelper();
+        orm = new ORMHelper();
         if(browser.equals(BrowserType.CHROME)) {
             driver = new ChromeDriver();
         } else if(browser.equals(BrowserType.FIREFOX)) {

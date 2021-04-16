@@ -4,9 +4,7 @@ import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.Group;
 import ru.stqa.pft.addressbook.model.Groups;
 
-import java.lang.invoke.MethodHandle;
 import java.sql.*;
-import java.util.Arrays;
 
 public class DBHelper {
     public Connection conn = null;
@@ -39,7 +37,7 @@ public class DBHelper {
                         .setName(rs.getString("group_name"))
                         .setHeader(rs.getString("group_header"))
                         .setFooter(rs.getString("group_footer"))
-                        .setCreated(rs.getString("created")));
+                        .setCreated(rs.getDate("created")));
             }
             rs.close();
             stmt.close();
