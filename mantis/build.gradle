@@ -14,6 +14,7 @@ dependencies {
     implementation 'org.subethamail:subethasmtp:3.1.7'
     implementation 'org.hibernate:hibernate-core:6.0.0.Alpha7'
     implementation 'mysql:mysql-connector-java:8.0.23'
+    implementation 'biz.futureware.mantis:mantis-axis-soap-client:1.2.19'
 }
 
 test {

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-public class MainTests extends TestBase {
+public class ResetPasswordTests extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
@@ -36,7 +36,7 @@ public class MainTests extends TestBase {
         Assert.assertTrue(messages.size() > 0, "Confirmation mail didn't come to " + account.getEmail());
         List<String> urlList = app.smtpServer().findURL(
                 app.smtpServer().readMessage(messages.iterator().next()));
-        Assert.assertTrue(urlList.size() > 0, "URL a't found in mail");
+        Assert.assertTrue(urlList.size() > 0, "URL aren't found in mail");
 
         //change password
         Account newAccount = new Account(account.getLogin(), "newPassword1");

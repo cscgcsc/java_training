@@ -3,13 +3,13 @@
 <suite name="Suite1" verbose="1" >
     <test name="Test 1" >
         <classes>
-            <class name="ru.stqa.pft.mantis.tests.MainTests"/>
+            <class name="ru.stqa.pft.mantis.tests.ResetPasswordTests"/>
         </classes>
     </test>
 
     <test name="Test 2">
         <classes>
-            <class name="ru.stqa.pft.mantis.tests.MainTests"/>
+            <class name="ru.stqa.pft.mantis.tests.ResetPasswordTests"/>
         </classes>
     </test>
 </suite>

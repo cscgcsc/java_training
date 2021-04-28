@@ -2,6 +2,7 @@ package ru.stqa.pft.mantis.tests;
 
 import org.apache.tools.ant.taskdefs.Sleep;
 import org.openqa.selenium.remote.BrowserType;
+import org.testng.SkipException;
 import org.testng.annotations.*;
 import ru.stqa.pft.mantis.appmanager.ApplicationManager;
 
@@ -16,6 +17,12 @@ public class TestBase {
     @AfterSuite
     public void TearDown() {
         app.stop();
+    }
+
+    public void skipIfNotFixed(int issueId) {
+        if (app.soapClient().isIssueFixed(issueId)) {
+            throw new SkipException("Ignored because of issue " + issueId);
+        }
     }
 
     protected void TestWait() {

@@ -6,7 +6,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import ru.stqa.pft.mantis.model.Account;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -25,6 +24,7 @@ public class ApplicationManager {
     private MenuHelper menu;
     private ORMHelper orm;
     private AccountHelper account;
+    private SoapClient soapClient;
 
     public ApplicationManager(String browserName) throws IOException {
         browser = browserName;
@@ -75,6 +75,11 @@ public class ApplicationManager {
     public MenuHelper menu() {
         if(menu == null) menu = new MenuHelper(this);
         return menu;
+    }
+
+    public SoapClient soapClient() {
+        if(soapClient == null) soapClient = new SoapClient(this);
+        return soapClient;
     }
 
     public WebDriver startDriver() {
