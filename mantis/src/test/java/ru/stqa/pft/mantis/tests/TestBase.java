@@ -20,7 +20,13 @@ public class TestBase {
     }
 
     public void skipIfNotFixed(int issueId) {
-        if (app.soapClient().isIssueFixed(issueId)) {
+        if (!app.soapClient().isIssueFixed(issueId)) {
+            throw new SkipException("Ignored because of issue " + issueId);
+        }
+    }
+
+    public void skipIfNotFixedREST(int issueId) {
+        if (!app.rest().isIssueFixed(issueId)) {
             throw new SkipException("Ignored because of issue " + issueId);
         }
     }

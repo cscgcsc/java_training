@@ -8,6 +8,8 @@ public class Issue {
     private String description;
     private BigInteger status;
     private String statusName;
+    private String state;
+    private String state_name;
 
     public Issue() {
     }
@@ -56,4 +58,21 @@ public class Issue {
         return this;
     }
 
+    public String getStateName() {
+        return state_name;
+    }
+
+    public Issue setStateName(String stateName) {
+        this.state_name = stateName;
+        return this;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public Issue setState(String state) {
+        this.state = state;
+        return this;
+    }
 }

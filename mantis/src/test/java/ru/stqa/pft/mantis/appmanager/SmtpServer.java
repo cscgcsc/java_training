@@ -1,16 +1,10 @@
 package ru.stqa.pft.mantis.appmanager;
 
 import org.apache.tools.ant.taskdefs.Sleep;
-import org.apache.tools.mail.MailMessage;
-import org.openqa.selenium.By;
 import org.subethamail.wiser.Wiser;
 import org.subethamail.wiser.WiserMessage;
-
-import javax.mail.Address;
-import javax.mail.Message;
 import javax.mail.internet.MimeMessage;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

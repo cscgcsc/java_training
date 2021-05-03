@@ -25,6 +25,7 @@ public class ApplicationManager {
     private ORMHelper orm;
     private AccountHelper account;
     private SoapClient soapClient;
+    private RestHelper rest;
 
     public ApplicationManager(String browserName) throws IOException {
         browser = browserName;
@@ -80,6 +81,11 @@ public class ApplicationManager {
     public SoapClient soapClient() {
         if(soapClient == null) soapClient = new SoapClient(this);
         return soapClient;
+    }
+
+    public RestHelper rest() {
+        if(rest == null) rest = new RestHelper(this);
+        return rest;
     }
 
     public WebDriver startDriver() {

@@ -1,16 +1,19 @@
 package ru.stqa.pft.mantis.tests;
-import org.testng.annotations.Test;
 
-public class SoapClientTests extends TestBase{
+import org.testng.annotations.Test;
+import java.io.IOException;
+
+
+public class RestTests extends TestBase{
 
     @Test
     public void TestSkipped() {
-        skipIfNotFixed(0000002);
+        skipIfNotFixedREST(1025);
     }
 
     @Test
     public void TestNotSkipped() {
-        skipIfNotFixed(0000001);
+        skipIfNotFixedREST(1024);
         System.out.println("OK");
     }
 }
