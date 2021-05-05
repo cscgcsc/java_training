@@ -31,12 +31,12 @@ public class ContactInformationTests extends TestBaseAuth {
         String allPhones = Stream.of(contactFromForm.getHomePhone(), contactFromForm.getMobilePhone(), contactFromForm.getWorkPhone())
                 .filter((str) -> !isNullOrEmpty(str))
                 .map(ContactInformationTests::cleanUpPhone)
-                .collect(Collectors.joining("\n"));
+                .collect(Collectors.joining("\\n"));
 
         String allEmails = Stream.of(contactFromForm.getEmail(), contactFromForm.getEmail2(), contactFromForm.getEmail3())
                 .filter((str) -> !isNullOrEmpty(str))
                 .map(ContactInformationTests::cleanUpEmail)
-                .collect(Collectors.joining("\n"));
+                .collect(Collectors.joining("\\n"));
         //verification
         assertThat("Phones in form and table don't match", allPhones, equalTo(contactFromTable.getAllPhones()));
         assertThat("Address in form and table don't match", cleanUpAddress(contactFromForm.getAddress()), equalTo(contactFromTable.getAddress()));
@@ -44,21 +44,21 @@ public class ContactInformationTests extends TestBaseAuth {
     }
 
     public static boolean isNullOrEmpty(String text) {
-        return (text == null || text.replaceAll("[\s\n]*", "").equals(""));
+        return (text == null || text.replaceAll("[\\s\\n]*", "").equals(""));
     }
 
     public static String cleanUpPhone(String text){
-        return text.replaceAll("[-()\s.]*", "");
+        return text.replaceAll("[-()\\s.]*", "");
     }
 
     public static String cleanUpEmail(String text){
-        return text.replaceAll("\s{2,}", "\s")
-                .replaceAll("^\s*|\s*$", "");
+        return text.replaceAll("\\s{2,}", "\\s")
+                .replaceAll("^\\s*|\\s*$", "");
     }
 
     public String cleanUpAddress(String text){
-        return text.replaceAll("\s{2,}", "\s")
-                .replaceAll("\s*\n+\s*|\n{2,}", "\n")
-                .replaceAll("^[\n\s]|[\n\s]$", "");
+        return text.replaceAll("\\s{2,}", "\\s")
+                .replaceAll("\\s*\\n+\\s*|\\n{2,}", "\\n")
+                .replaceAll("^[\\n\\s]|[\\n\\s]$", "");
     }
 }
