@@ -26,6 +26,9 @@ test {
     if(project.hasProperty("settings")) {
         systemProperty 'settings', "${settings}"
     }
+    if(project.hasProperty("platform")) {
+        systemProperty 'platform', "${platform}"
+    }
 }
 
 task testGroups(type: Test) {
@@ -38,6 +41,9 @@ task testGroups(type: Test) {
     if(project.hasProperty("settings")) {
         systemProperty 'settings', "${settings}"
     }
+    if(project.hasProperty("platform")) {
+        systemProperty 'platform', "${platform}"
+    }
 }
 
 task testContacts(type: Test) {
@@ -49,5 +55,8 @@ task testContacts(type: Test) {
     }
     if(project.hasProperty("settings")) {
         systemProperty 'settings', "${settings}"
+    }
+    if(project.hasProperty("platform")) {
+        systemProperty 'platform', "${platform}"
     }
 }

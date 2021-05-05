@@ -4,6 +4,8 @@
     <test name="Groups test" >
         <classes>
             <class name="ru.stqa.pft.addressbook.tests.GroupRemovalTests"/>
+            <class name="ru.stqa.pft.addressbook.tests.GroupCreationTests"/>
+            <class name="ru.stqa.pft.addressbook.tests.GroupModificationTests"/>
         </classes>
     </test>
 
@@ -11,6 +13,10 @@
         <classes>
             <class name="ru.stqa.pft.addressbook.tests.ContactCreationTests"/>
             <class name="ru.stqa.pft.addressbook.tests.ContactRemovalTests"/>
+            <class name="ru.stqa.pft.addressbook.tests.ContactModificationTests"/>
+            <class name="ru.stqa.pft.addressbook.tests.AddingContactsToGroupTests"/>
+            <class name="ru.stqa.pft.addressbook.tests.ContactsRemovalFromGroupTests"/>
+            <class name="ru.stqa.pft.addressbook.tests.ContactInformationTests"/>
         </classes>
     </test>
 </suite>
